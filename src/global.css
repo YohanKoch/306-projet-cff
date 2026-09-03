@@ -1,0 +1,308 @@
+/*
+ * global.css — Styleguide CFF / SBB pour shadcn/ui
+ *
+ * Les valeurs proviennent du design system officiel SBB "Lyne"
+ * (paquet npm @sbb-esta/lyne-design-tokens v2.1.0).
+ * Les tokens shadcn (--background, --primary, ...) sont mappés
+ * sur la palette SBB, donc tous les composants shadcn héritent du
+ * look & feel CFF sans modification de leur code.
+ */
+
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* -------------------------------------------------------------------------
+ * Police SBB Web (CDN officiel SBB).
+ * L'usage de la police SBB est réservé aux projets CFF / partenaires CFF.
+ * Sans licence, retirer ces @font-face : la pile de repli
+ * (Helvetica Neue / Arial) prend alors le relais.
+ * ---------------------------------------------------------------------- */
+@font-face {
+  font-family: 'SBB';
+  src: url('https://cdn.app.sbb.ch/fonts/v1_9_subset/SBBWeb-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SBB';
+  src: url('https://cdn.app.sbb.ch/fonts/v1_9_subset/SBBWeb-Roman.woff2') format('woff2');
+  font-weight: 400;
+  font-display: fallback;
+}
+@font-face {
+  font-family: 'SBB';
+  src: url('https://cdn.app.sbb.ch/fonts/v1_9_subset/SBBWeb-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* -------------------------------------------------------------------------
+ * 1. Palette brute CFF (couleurs de marque, valeurs officielles)
+ * ---------------------------------------------------------------------- */
+:root {
+  /* Rouge CFF */
+  --sbb-red: #eb0000;
+  --sbb-red-85: #ff3838;
+  --sbb-red-125: #c60018;
+  --sbb-red-150: #a20013;
+
+  /* Gris */
+  --sbb-white: #ffffff;
+  --sbb-milk: #f6f6f6;
+  --sbb-cloud: #e5e5e5;
+  --sbb-silver: #dcdcdc;
+  --sbb-aluminium: #d2d2d2;
+  --sbb-platinum: #cdcdcd;
+  --sbb-cement: #bdbdbd;
+  --sbb-graphite: #b7b7b7;
+  --sbb-storm: #a8a8a8;
+  --sbb-smoke: #8d8d8d;
+  --sbb-metal: #767676;
+  --sbb-granite: #686868;
+  --sbb-anthracite: #5a5a5a;
+  --sbb-iron: #444444;
+  --sbb-charcoal: #212121;
+  --sbb-midnight: #151515;
+  --sbb-black: #000000;
+
+  /* Couleurs d'accent */
+  --sbb-blue: #2d327d;
+  --sbb-royal: #06348b;
+  --sbb-night: #143a85;
+  --sbb-sky: #0074bf;
+  --sbb-violet: #6f2282;
+  --sbb-pink: #c7387a;
+  --sbb-autumn: #cf3b00;
+  --sbb-orange: #f27e00;
+  --sbb-peach: #fcbb00;
+  --sbb-lemon: #ffde15;
+  --sbb-brown: #a05400;
+  --sbb-green: #008233;
+  --sbb-turquoise: #007e84;
+}
+
+/* -------------------------------------------------------------------------
+ * 2. Tokens shadcn — thème clair
+ * ---------------------------------------------------------------------- */
+:root {
+  --radius: 0.5rem; /* --sbb-border-radius-4x */
+
+  --background: var(--sbb-white);
+  --foreground: var(--sbb-charcoal);
+
+  --card: var(--sbb-white);
+  --card-foreground: var(--sbb-charcoal);
+
+  --popover: var(--sbb-white);
+  --popover-foreground: var(--sbb-charcoal);
+
+  /* Bouton primaire CFF : rouge, texte blanc */
+  --primary: var(--sbb-red);
+  --primary-foreground: var(--sbb-white);
+
+  --secondary: var(--sbb-milk);
+  --secondary-foreground: var(--sbb-charcoal);
+
+  --muted: var(--sbb-milk);
+  --muted-foreground: var(--sbb-metal);
+
+  --accent: var(--sbb-cloud);
+  --accent-foreground: var(--sbb-charcoal);
+
+  --destructive: var(--sbb-red-125);
+  --destructive-foreground: var(--sbb-white);
+
+  --border: var(--sbb-cloud);
+  --input: var(--sbb-storm);
+  /* Focus CFF : contour noir 1px, offset 3px (cf. @layer base) */
+  --ring: var(--sbb-black);
+
+  /* Graphiques : couleurs d'accent CFF */
+  --chart-1: var(--sbb-red);
+  --chart-2: var(--sbb-sky);
+  --chart-3: var(--sbb-green);
+  --chart-4: var(--sbb-orange);
+  --chart-5: var(--sbb-violet);
+
+  --sidebar: var(--sbb-milk);
+  --sidebar-foreground: var(--sbb-charcoal);
+  --sidebar-primary: var(--sbb-red);
+  --sidebar-primary-foreground: var(--sbb-white);
+  --sidebar-accent: var(--sbb-cloud);
+  --sidebar-accent-foreground: var(--sbb-charcoal);
+  --sidebar-border: var(--sbb-silver);
+  --sidebar-ring: var(--sbb-black);
+}
+
+/* -------------------------------------------------------------------------
+ * 3. Tokens shadcn — thème sombre (SBB dark theme)
+ * ---------------------------------------------------------------------- */
+.dark {
+  --background: var(--sbb-midnight);
+  --foreground: var(--sbb-white);
+
+  --card: var(--sbb-charcoal);
+  --card-foreground: var(--sbb-white);
+
+  --popover: var(--sbb-charcoal);
+  --popover-foreground: var(--sbb-white);
+
+  --primary: var(--sbb-red);
+  --primary-foreground: var(--sbb-white);
+
+  --secondary: var(--sbb-iron);
+  --secondary-foreground: var(--sbb-white);
+
+  --muted: var(--sbb-charcoal);
+  --muted-foreground: var(--sbb-graphite);
+
+  --accent: var(--sbb-iron);
+  --accent-foreground: var(--sbb-white);
+
+  --destructive: var(--sbb-red-85);
+  --destructive-foreground: var(--sbb-midnight);
+
+  --border: var(--sbb-iron);
+  --input: var(--sbb-anthracite);
+  --ring: var(--sbb-white);
+
+  --chart-1: var(--sbb-red-85);
+  --chart-2: #128ede; /* sky dark */
+  --chart-3: #109d47; /* green dark */
+  --chart-4: #fb8e19; /* orange dark */
+  --chart-5: #b36cc5; /* violet dark */
+
+  --sidebar: var(--sbb-charcoal);
+  --sidebar-foreground: var(--sbb-white);
+  --sidebar-primary: var(--sbb-red);
+  --sidebar-primary-foreground: var(--sbb-white);
+  --sidebar-accent: var(--sbb-iron);
+  --sidebar-accent-foreground: var(--sbb-white);
+  --sidebar-border: var(--sbb-iron);
+  --sidebar-ring: var(--sbb-white);
+}
+
+/* -------------------------------------------------------------------------
+ * 4. Exposition des tokens à Tailwind
+ *    -> bg-primary, text-muted-foreground, bg-sbb-sky, font-sans, ...
+ * ---------------------------------------------------------------------- */
+@theme inline {
+  --font-sans: 'SBB', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Palette CFF accessible en utilitaires : bg-sbb-red, text-sbb-sky, ... */
+  --color-sbb-red: var(--sbb-red);
+  --color-sbb-red-85: var(--sbb-red-85);
+  --color-sbb-red-125: var(--sbb-red-125);
+  --color-sbb-red-150: var(--sbb-red-150);
+  --color-sbb-white: var(--sbb-white);
+  --color-sbb-milk: var(--sbb-milk);
+  --color-sbb-cloud: var(--sbb-cloud);
+  --color-sbb-silver: var(--sbb-silver);
+  --color-sbb-aluminium: var(--sbb-aluminium);
+  --color-sbb-platinum: var(--sbb-platinum);
+  --color-sbb-cement: var(--sbb-cement);
+  --color-sbb-graphite: var(--sbb-graphite);
+  --color-sbb-storm: var(--sbb-storm);
+  --color-sbb-smoke: var(--sbb-smoke);
+  --color-sbb-metal: var(--sbb-metal);
+  --color-sbb-granite: var(--sbb-granite);
+  --color-sbb-anthracite: var(--sbb-anthracite);
+  --color-sbb-iron: var(--sbb-iron);
+  --color-sbb-charcoal: var(--sbb-charcoal);
+  --color-sbb-midnight: var(--sbb-midnight);
+  --color-sbb-black: var(--sbb-black);
+  --color-sbb-blue: var(--sbb-blue);
+  --color-sbb-royal: var(--sbb-royal);
+  --color-sbb-night: var(--sbb-night);
+  --color-sbb-sky: var(--sbb-sky);
+  --color-sbb-violet: var(--sbb-violet);
+  --color-sbb-pink: var(--sbb-pink);
+  --color-sbb-autumn: var(--sbb-autumn);
+  --color-sbb-orange: var(--sbb-orange);
+  --color-sbb-peach: var(--sbb-peach);
+  --color-sbb-lemon: var(--sbb-lemon);
+  --color-sbb-brown: var(--sbb-brown);
+  --color-sbb-green: var(--sbb-green);
+  --color-sbb-turquoise: var(--sbb-turquoise);
+}
+
+/* -------------------------------------------------------------------------
+ * 5. Styles de base CFF (typographie et focus)
+ * ---------------------------------------------------------------------- */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    /* --sbb-typo-line-height-text / letter-spacing-text */
+    line-height: 1.75;
+    letter-spacing: 0.03em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    /* --sbb-typo-line-height-heading / letter-spacing-heading */
+    line-height: 1.4;
+    letter-spacing: 0;
+    font-weight: 700;
+  }
+
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.5rem; }
+  h4 { font-size: 1.25rem; }
+  h5 { font-size: 1.125rem; }
+  h6 { font-size: 0.875rem; }
+
+  /*
+   * Focus CFF : contour fin (1px), offset 3px, jamais de halo flou.
+   * Le `--tw-ring-shadow` neutralise le ring par défaut de shadcn
+   * (focus-visible:ring-[3px]) pour garder le focus officiel CFF.
+   */
+  *:focus-visible {
+    outline: 1px solid var(--ring);
+    outline-offset: 0.1875rem;
+    --tw-ring-shadow: 0 0 #0000 !important;
+  }
+}
