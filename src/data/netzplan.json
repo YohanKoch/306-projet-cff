@@ -1,0 +1,1596 @@
+{
+  "source": "https://network.sbb.ch/static/netzplan.json",
+  "lines": [
+    {
+      "code": "IC1",
+      "label": "IC1",
+      "color": "#DD2F1D",
+      "stations": [
+        "GEAP",
+        "GE",
+        "REN",
+        "LS",
+        "FRI",
+        "BN",
+        "ZUE",
+        "ZOER",
+        "ZFH",
+        "W",
+        "WIL",
+        "UZW",
+        "FLA",
+        "GSS",
+        "SG"
+      ],
+      "from": "GEAP",
+      "to": "SG"
+    },
+    {
+      "code": "IC2",
+      "label": "IC2",
+      "color": "#9184BE",
+      "stations": [
+        "ZUE",
+        "ZG",
+        "GD",
+        "AL",
+        "BEL",
+        "LG"
+      ],
+      "from": "ZUE",
+      "to": "LG"
+    },
+    {
+      "code": "IC3",
+      "label": "IC3",
+      "color": "#008B39",
+      "stations": [
+        "BS",
+        "ZUE",
+        "SA",
+        "LQ",
+        "CH"
+      ],
+      "from": "BS",
+      "to": "CH"
+    },
+    {
+      "code": "IC5",
+      "label": "IC5",
+      "color": "#F39100",
+      "stations": [
+        "LS",
+        "REN",
+        "YV",
+        "NE",
+        "BI",
+        "SO",
+        "OL",
+        "AA",
+        "ZUE",
+        "ZFH",
+        "W",
+        "SG",
+        "RS"
+      ],
+      "from": "LS",
+      "to": "RS"
+    },
+    {
+      "code": "IC6",
+      "label": "IC6",
+      "color": "#94C11A",
+      "stations": [
+        "BS",
+        "LST",
+        "OL",
+        "BN",
+        "TH",
+        "SP",
+        "VI",
+        "BR"
+      ],
+      "from": "BS",
+      "to": "BR"
+    },
+    {
+      "code": "IC8",
+      "label": "IC8",
+      "color": "#0090D6",
+      "stations": [
+        "BR",
+        "VI",
+        "SP",
+        "TH",
+        "BN",
+        "ZUE",
+        "ZFH",
+        "W",
+        "FF",
+        "WF",
+        "AW",
+        "RH"
+      ],
+      "from": "BR",
+      "to": "RH"
+    },
+    {
+      "code": "IC21",
+      "label": "IC21",
+      "color": "#FEC800",
+      "stations": [
+        "BS",
+        "OL",
+        "LZ",
+        "GD",
+        "BEL",
+        "LG"
+      ],
+      "from": "BS",
+      "to": "LG"
+    },
+    {
+      "code": "IC51",
+      "label": "IC51",
+      "color": "#AD0600",
+      "stations": [
+        "LS",
+        "REN",
+        "YV",
+        "NE",
+        "BI",
+        "GN",
+        "MOU",
+        "DMT",
+        "LFN",
+        "BS"
+      ],
+      "from": "LS",
+      "to": "BS"
+    },
+    {
+      "code": "IC61",
+      "label": "IC61",
+      "color": "#EA5097",
+      "stations": [
+        "BS",
+        "LST",
+        "OL",
+        "BN",
+        "TH",
+        "SP",
+        "IW",
+        "IO"
+      ],
+      "from": "BS",
+      "to": "IO"
+    },
+    {
+      "code": "IC81",
+      "label": "IC81",
+      "color": "#7DA9C0",
+      "stations": [
+        "IO",
+        "IW",
+        "SP",
+        "TH",
+        "BN",
+        "ZUE",
+        "ZFH",
+        "W",
+        "FF",
+        "WF",
+        "AW",
+        "RH"
+      ],
+      "from": "IO",
+      "to": "RH"
+    },
+    {
+      "code": "ICX1",
+      "label": "IC",
+      "color": "#565655",
+      "stations": [
+        "ZUE",
+        "SH"
+      ],
+      "from": "ZUE",
+      "to": "SH"
+    },
+    {
+      "code": "IR13",
+      "label": "IR13",
+      "color": "#2CAEB3",
+      "stations": [
+        "ZUE",
+        "ZOER",
+        "ZFH",
+        "W",
+        "WIL",
+        "UZW",
+        "FLA",
+        "GSS",
+        "SG",
+        "RS",
+        "SMG",
+        "HEBG",
+        "ALT",
+        "BU",
+        "SA",
+        "BRAG",
+        "MF",
+        "LQ",
+        "CH"
+      ],
+      "from": "ZUE",
+      "to": "CH"
+    },
+    {
+      "code": "IR15",
+      "label": "IR15",
+      "color": "#15AE8D",
+      "stations": [
+        "GEAP",
+        "GE",
+        "NY",
+        "MOR",
+        "LS",
+        "PAL",
+        "ROM",
+        "FRI",
+        "BN",
+        "ZF",
+        "SS",
+        "LZ"
+      ],
+      "from": "GEAP",
+      "to": "LZ"
+    },
+    {
+      "code": "IR16",
+      "label": "IR16",
+      "color": "#A36B1F",
+      "stations": [
+        "BN",
+        "OL",
+        "AA",
+        "BG",
+        "BD",
+        "ZUE"
+      ],
+      "from": "BN",
+      "to": "ZUE"
+    },
+    {
+      "code": "IR17",
+      "label": "IR17",
+      "color": "#294B95",
+      "stations": [
+        "BN",
+        "BDF",
+        "WY",
+        "HB",
+        "LTH",
+        "OL"
+      ],
+      "from": "BN",
+      "to": "OL"
+    },
+    {
+      "code": "IR26",
+      "label": "IR26",
+      "color": "#B69495",
+      "stations": [
+        "BS",
+        "OL",
+        "LZ",
+        "GD",
+        "SCHW",
+        "BRU",
+        "FL",
+        "AL",
+        "ER",
+        "GOE",
+        "AI",
+        "AP",
+        "FA",
+        "LAV",
+        "BO",
+        "BIA",
+        "CAST",
+        "BEL",
+        "GIU",
+        "CD",
+        "TEN",
+        "LO"
+      ],
+      "from": "BS",
+      "to": "LO"
+    },
+    {
+      "code": "IR27",
+      "label": "IR27",
+      "color": "#66711F",
+      "stations": [
+        "BS",
+        "LST",
+        "SIS",
+        "GKD",
+        "OL",
+        "ZF",
+        "SS",
+        "LZ"
+      ],
+      "from": "BS",
+      "to": "LZ"
+    },
+    {
+      "code": "IR35",
+      "label": "IR35",
+      "color": "#005619",
+      "stations": [
+        "BN",
+        "BDF",
+        "HB",
+        "LTH",
+        "OL",
+        "ZAS",
+        "ZUE",
+        "TW",
+        "WAE",
+        "PF",
+        "SIB",
+        "ZB",
+        "UNT",
+        "WAL",
+        "FMS",
+        "SA",
+        "BRAG",
+        "MF",
+        "LQ",
+        "CH"
+      ],
+      "from": "BN",
+      "to": "CH"
+    },
+    {
+      "code": "IR36",
+      "label": "IR36",
+      "color": "#AF126F",
+      "stations": [
+        "BS",
+        "RF",
+        "MOE",
+        "STS",
+        "FCK",
+        "BG",
+        "BD",
+        "DT",
+        "ZAS",
+        "ZUE",
+        "ZOER",
+        "ZFH"
+      ],
+      "from": "BS",
+      "to": "ZFH"
+    },
+    {
+      "code": "IR37",
+      "label": "IR37",
+      "color": "#C4D983",
+      "stations": [
+        "BS",
+        "LST",
+        "SIS",
+        "GKD",
+        "AA",
+        "LB",
+        "ZUE"
+      ],
+      "from": "BS",
+      "to": "ZUE"
+    },
+    {
+      "code": "IR46",
+      "label": "IR46",
+      "color": "#006788",
+      "stations": [
+        "ZUE",
+        "ZG",
+        "GD",
+        "SCHW",
+        "BRU",
+        "FL",
+        "AL",
+        "ER",
+        "GOE",
+        "AI",
+        "AP",
+        "FA",
+        "LAV",
+        "BO",
+        "BIA",
+        "CAST",
+        "BEL",
+        "GIU",
+        "CD",
+        "TEN",
+        "LO"
+      ],
+      "from": "ZUE",
+      "to": "LO"
+    },
+    {
+      "code": "IR55",
+      "label": "IR55",
+      "color": "#ABA000",
+      "stations": [
+        "BI",
+        "GS",
+        "SO",
+        "OEN",
+        "OL",
+        "ZUE"
+      ],
+      "from": "BI",
+      "to": "ZUE"
+    },
+    {
+      "code": "IR56",
+      "label": "IR56",
+      "color": "#B455A0",
+      "stations": [
+        "BI",
+        "GN",
+        "MOU",
+        "DMT",
+        "LFN",
+        "BS"
+      ],
+      "from": "BI",
+      "to": "BS"
+    },
+    {
+      "code": "IR57",
+      "label": "IR57",
+      "color": "#7D8845",
+      "stations": [
+        "GEAP",
+        "GE",
+        "NY",
+        "GLA",
+        "MOR",
+        "YV",
+        "NE"
+      ],
+      "from": "GEAP",
+      "to": "NE"
+    },
+    {
+      "code": "IR65",
+      "label": "IR65",
+      "color": "#0077BA",
+      "stations": [
+        "BN",
+        "LY",
+        "BI"
+      ],
+      "from": "BN",
+      "to": "BI"
+    },
+    {
+      "code": "IR66",
+      "label": "IR66",
+      "color": "#2CAEB3",
+      "stations": [
+        "BN",
+        "BNB",
+        "KZ",
+        "INS",
+        "NE",
+        "CHN",
+        "GEC",
+        "HGV",
+        "CF"
+      ],
+      "from": "BN",
+      "to": "CF"
+    },
+    {
+      "code": "IR70",
+      "label": "IR70",
+      "color": "#F193BD",
+      "stations": [
+        "LZ",
+        "ZG",
+        "ZUE"
+      ],
+      "from": "LZ",
+      "to": "ZUE"
+    },
+    {
+      "code": "IR75",
+      "label": "IR75",
+      "color": "#7A448F",
+      "stations": [
+        "LZ",
+        "RK",
+        "ZG",
+        "BAA",
+        "TW",
+        "ZUE",
+        "ZFH",
+        "W",
+        "FF",
+        "WF",
+        "KR",
+        "KO"
+      ],
+      "from": "LZ",
+      "to": "KO"
+    },
+    {
+      "code": "IR90",
+      "label": "IR90",
+      "color": "#0078A1",
+      "stations": [
+        "GEAP",
+        "GE",
+        "REN",
+        "LS",
+        "VV",
+        "MX",
+        "AIG",
+        "SM",
+        "MA",
+        "SIO",
+        "SIE",
+        "VI",
+        "BR"
+      ],
+      "from": "GEAP",
+      "to": "BR"
+    },
+    {
+      "code": "IR95",
+      "label": "IR95",
+      "color": "#842C71",
+      "stations": [
+        "GEAP",
+        "GE",
+        "NY",
+        "MOR",
+        "REN",
+        "LS",
+        "VV",
+        "MX",
+        "AIG",
+        "MA",
+        "SIO",
+        "SIE",
+        "LK",
+        "VI",
+        "BR"
+      ],
+      "from": "GEAP",
+      "to": "BR"
+    },
+    {
+      "code": "RE6",
+      "label": "RE6",
+      "color": "#581645",
+      "stations": [
+        "NE",
+        "CHN",
+        "GEC",
+        "HGV",
+        "CF"
+      ],
+      "from": "NE",
+      "to": "CF"
+    },
+    {
+      "code": "RE33",
+      "label": "RE33",
+      "color": "#006161",
+      "stations": [
+        "ANN",
+        "CHEB",
+        "GEV",
+        "CHHO",
+        "CABA",
+        "LAPR",
+        "GE",
+        "COP",
+        "NY",
+        "GLA",
+        "ROL",
+        "ALL",
+        "MOR",
+        "REN",
+        "LS",
+        "VV",
+        "MX",
+        "VIL",
+        "AIG",
+        "BEX",
+        "SM",
+        "MA"
+      ],
+      "from": "ANN",
+      "to": "MA"
+    },
+    {
+      "code": "RE37",
+      "label": "RE37",
+      "color": "#F6AF94",
+      "stations": [
+        "AA",
+        "LB",
+        "ZUE"
+      ],
+      "from": "AA",
+      "to": "ZUE"
+    },
+    {
+      "code": "RE48",
+      "label": "RE48",
+      "color": "#C1AB6B",
+      "stations": [
+        "ZUE",
+        "ZOER",
+        "BUE",
+        "SH"
+      ],
+      "from": "ZUE",
+      "to": "SH"
+    }
+  ],
+  "stations": [
+    {
+      "code": "AA",
+      "label": "Aarau",
+      "uic": 8502113,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "AIG",
+      "label": "Aigle",
+      "uic": 8501400,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "AI",
+      "label": "Airolo",
+      "uic": 8505201,
+      "relevance": 2,
+      "labelSize": "small"
+    },
+    {
+      "code": "ALL",
+      "label": "Allaman",
+      "uic": 8501035,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "AL",
+      "label": "Altdorf UR",
+      "uic": 8505113,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "ALT",
+      "label": "Altstätten SG",
+      "uic": 8506319,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "AP",
+      "label": "Ambrì-Piotta",
+      "uic": 8505202,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "AW",
+      "label": "Amriswil",
+      "uic": 8506109,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "ANN",
+      "label": "Annemasse",
+      "uic": 8774549,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "GD",
+      "label": "Arth-Goldau",
+      "uic": 8505004,
+      "relevance": 4,
+      "labelSize": "medium"
+    },
+    {
+      "code": "BAA",
+      "label": "Baar",
+      "uic": 8502206,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "BRAG",
+      "label": "Bad Ragaz",
+      "uic": 8509004,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "BD",
+      "label": "Baden",
+      "uic": 8503504,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "BS",
+      "label": "Basel SBB",
+      "uic": 8500010,
+      "relevance": 3,
+      "labelSize": "large"
+    },
+    {
+      "code": "BEL",
+      "label": "Bellinzona",
+      "uic": 8505213,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "BN",
+      "label": "Bern",
+      "uic": 8507000,
+      "relevance": 5,
+      "labelSize": "large"
+    },
+    {
+      "code": "BNB",
+      "label": "Bern Brünnen Westside",
+      "uic": 8516154,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "BEX",
+      "label": "Bex",
+      "uic": 8501402,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "BIA",
+      "label": "Biasca",
+      "uic": 8505209,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "BI",
+      "label": "Biel/Bienne",
+      "uic": 8504300,
+      "relevance": 3,
+      "labelSize": "medium"
+    },
+    {
+      "code": "BO",
+      "label": "Bodio TI",
+      "uic": 8505207,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "BR",
+      "label": "Brig",
+      "uic": 8501609,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "BG",
+      "label": "Brugg AG",
+      "uic": 8500309,
+      "relevance": 2,
+      "labelSize": "small"
+    },
+    {
+      "code": "BRU",
+      "label": "Brunnen",
+      "uic": 8505007,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "BU",
+      "label": "Buchs SG",
+      "uic": 8509404,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "BUE",
+      "label": "Bülach",
+      "uic": 8503400,
+      "relevance": 2,
+      "labelSize": "small"
+    },
+    {
+      "code": "BDF",
+      "label": "Burgdorf",
+      "uic": 8508005,
+      "relevance": 2,
+      "labelSize": "small"
+    },
+    {
+      "code": "CD",
+      "label": "Cadenazzo",
+      "uic": 8505404,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "CAST",
+      "label": "Castione-Arbedo",
+      "uic": 8505212,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "CHN",
+      "label": "Chambrelien",
+      "uic": 8504234,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "CHEB",
+      "label": "Chêne-Bourg",
+      "uic": 8516274,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "CHI",
+      "label": "Chiasso",
+      "uic": 8505307,
+      "relevance": 1,
+      "labelSize": "medium"
+    },
+    {
+      "code": "CH",
+      "label": "Chur",
+      "uic": 8509000,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "COP",
+      "label": "Coppet",
+      "uic": 8501023,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "DMT",
+      "label": "Delémont",
+      "uic": 8500109,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "DT",
+      "label": "Dietikon",
+      "uic": 8503508,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "ER",
+      "label": "Erstfeld",
+      "uic": 8505114,
+      "relevance": 2,
+      "labelSize": "small"
+    },
+    {
+      "code": "FA",
+      "label": "Faido",
+      "uic": 8505204,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "FLA",
+      "label": "Flawil",
+      "uic": 8506209,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "FL",
+      "label": "Flüelen",
+      "uic": 8505112,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "FMS",
+      "label": "Flums",
+      "uic": 8509413,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "FF",
+      "label": "Frauenfeld",
+      "uic": 8506100,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "FRI",
+      "label": "Fribourg/Freiburg",
+      "uic": 8504100,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "FCK",
+      "label": "Frick",
+      "uic": 8500305,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "GKD",
+      "label": "Gelterkinden",
+      "uic": 8500027,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "GE",
+      "label": "Genève",
+      "uic": 8501008,
+      "relevance": 5,
+      "labelSize": "large"
+    },
+    {
+      "code": "GEAP",
+      "label": "Genève-Aéroport",
+      "uic": 8501026,
+      "relevance": 2,
+      "labelSize": "small"
+    },
+    {
+      "code": "CHHO",
+      "label": "Genève-Champel",
+      "uic": 8516272,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "GEV",
+      "label": "Genève-Eaux-Vives",
+      "uic": 8516273,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "GIU",
+      "label": "Giubiasco",
+      "uic": 8505214,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "GLA",
+      "label": "Gland",
+      "uic": 8501031,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "GOE",
+      "label": "Göschenen",
+      "uic": 8505119,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "GSS",
+      "label": "Gossau SG",
+      "uic": 8506210,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "GN",
+      "label": "Grenchen Nord",
+      "uic": 8500159,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "GS",
+      "label": "Grenchen Süd",
+      "uic": 8500202,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "HEBG",
+      "label": "Heerbrugg",
+      "uic": 8506317,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "HB",
+      "label": "Herzogenbuchsee",
+      "uic": 8508008,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "INS",
+      "label": "Ins",
+      "uic": 8504483,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "IO",
+      "label": "Interlaken Ost",
+      "uic": 8507492,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "IW",
+      "label": "Interlaken West",
+      "uic": 8507493,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "KZ",
+      "label": "Kerzers",
+      "uic": 8504400,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "KO",
+      "label": "Konstanz",
+      "uic": 8014586,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "KR",
+      "label": "Kreuzlingen",
+      "uic": 8506131,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "CF",
+      "label": "La Chaux-de-Fonds",
+      "uic": 8504314,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "CABA",
+      "label": "Lancy-Bachet",
+      "uic": 8517142,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "LAPR",
+      "label": "Lancy-Pont-Rouge",
+      "uic": 8516155,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "LQ",
+      "label": "Landquart",
+      "uic": 8509002,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "LTH",
+      "label": "Langenthal",
+      "uic": 8508100,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "LFN",
+      "label": "Laufen",
+      "uic": 8500113,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "LS",
+      "label": "Lausanne",
+      "uic": 8501120,
+      "relevance": 2,
+      "labelSize": "large"
+    },
+    {
+      "code": "LAV",
+      "label": "Lavorgo",
+      "uic": 8505205,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "LB",
+      "label": "Lenzburg",
+      "uic": 8502119,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "GEC",
+      "label": "Les Geneveys-sur-Coffrane",
+      "uic": 8504236,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "HGV",
+      "label": "Les Hauts-Geneveys",
+      "uic": 8504237,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "LK",
+      "label": "Leuk",
+      "uic": 8501601,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "LST",
+      "label": "Liestal",
+      "uic": 8500023,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "LO",
+      "label": "Locarno",
+      "uic": 8505400,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "LG",
+      "label": "Lugano",
+      "uic": 8505300,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "LZ",
+      "label": "Luzern",
+      "uic": 8505000,
+      "relevance": 5,
+      "labelSize": "large"
+    },
+    {
+      "code": "LY",
+      "label": "Lyss",
+      "uic": 8504414,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "MF",
+      "label": "Maienfeld",
+      "uic": 8509003,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "MA",
+      "label": "Martigny",
+      "uic": 8501500,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "MOE",
+      "label": "Möhlin",
+      "uic": 8500302,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "MX",
+      "label": "Montreux",
+      "uic": 8501300,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "MOR",
+      "label": "Morges",
+      "uic": 8501037,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "MOU",
+      "label": "Moutier",
+      "uic": 8500105,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "NE",
+      "label": "Neuchâtel",
+      "uic": 8504221,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "NY",
+      "label": "Nyon",
+      "uic": 8501030,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "OEN",
+      "label": "Oensingen",
+      "uic": 8500212,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "OL",
+      "label": "Olten",
+      "uic": 8500218,
+      "relevance": 3,
+      "labelSize": "medium"
+    },
+    {
+      "code": "PAL",
+      "label": "Palézieux",
+      "uic": 8504014,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "PF",
+      "label": "Pfäffikon SZ",
+      "uic": 8503209,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "REN",
+      "label": "Renens VD",
+      "uic": 8501118,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "RF",
+      "label": "Rheinfelden",
+      "uic": 8500301,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "ROL",
+      "label": "Rolle",
+      "uic": 8501033,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "RH",
+      "label": "Romanshorn",
+      "uic": 8506121,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "ROM",
+      "label": "Romont FR",
+      "uic": 8504023,
+      "relevance": 1,
+      "labelSize": "medium"
+    },
+    {
+      "code": "RS",
+      "label": "Rorschach",
+      "uic": 8506311,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "RK",
+      "label": "Rotkreuz",
+      "uic": 8502202,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "SA",
+      "label": "Sargans",
+      "uic": 8509411,
+      "relevance": 2,
+      "labelSize": "small"
+    },
+    {
+      "code": "SH",
+      "label": "Schaffhausen",
+      "uic": 8503424,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "SCHW",
+      "label": "Schwyz",
+      "uic": 8505006,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "SIB",
+      "label": "Siebnen-Wangen",
+      "uic": 8503221,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "SIE",
+      "label": "Sierre/Siders",
+      "uic": 8501509,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "SIO",
+      "label": "Sion",
+      "uic": 8501506,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "SIS",
+      "label": "Sissach",
+      "uic": 8500026,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "SO",
+      "label": "Solothurn",
+      "uic": 8500207,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "SP",
+      "label": "Spiez",
+      "uic": 8507483,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "SG",
+      "label": "St. Gallen",
+      "uic": 8506302,
+      "relevance": 5,
+      "labelSize": "large"
+    },
+    {
+      "code": "SMG",
+      "label": "St. Margrethen SG",
+      "uic": 8506314,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "STS",
+      "label": "Stein-Säckingen",
+      "uic": 8500320,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "SM",
+      "label": "St-Maurice",
+      "uic": 8501403,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "SS",
+      "label": "Sursee",
+      "uic": 8502007,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "TEN",
+      "label": "Tenero",
+      "uic": 8505401,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "TW",
+      "label": "Thalwil",
+      "uic": 8503202,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "TH",
+      "label": "Thun",
+      "uic": 8507100,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "UNT",
+      "label": "Unterterzen",
+      "uic": 8509416,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "UZW",
+      "label": "Uzwil",
+      "uic": 8506208,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "VV",
+      "label": "Vevey",
+      "uic": 8501200,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "VIL",
+      "label": "Villeneuve VD",
+      "uic": 8501303,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "VI",
+      "label": "Visp",
+      "uic": 8501605,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "WAE",
+      "label": "Wädenswil",
+      "uic": 8503206,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "WAL",
+      "label": "Walenstadt",
+      "uic": 8509414,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "WF",
+      "label": "Weinfelden",
+      "uic": 8506105,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "WIL",
+      "label": "Wil SG",
+      "uic": 8506206,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "W",
+      "label": "Winterthur",
+      "uic": 8506000,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "WY",
+      "label": "Wynigen",
+      "uic": 8508006,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "YV",
+      "label": "Yverdon-les-Bains",
+      "uic": 8504200,
+      "relevance": 2,
+      "labelSize": "small"
+    },
+    {
+      "code": "ZB",
+      "label": "Ziegelbrücke",
+      "uic": 8503225,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "ZF",
+      "label": "Zofingen",
+      "uic": 8502001,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "ZG",
+      "label": "Zug",
+      "uic": 8502204,
+      "relevance": 2,
+      "labelSize": "medium"
+    },
+    {
+      "code": "ZAS",
+      "label": "Zürich Altstetten",
+      "uic": 8503001,
+      "relevance": 1,
+      "labelSize": "small"
+    },
+    {
+      "code": "ZFH",
+      "label": "Zürich Flughafen",
+      "uic": 8503016,
+      "relevance": 2,
+      "labelSize": "small"
+    },
+    {
+      "code": "ZUE",
+      "label": "Zürich HB",
+      "uic": 8503000,
+      "relevance": 6,
+      "labelSize": "large"
+    },
+    {
+      "code": "ZOER",
+      "label": "Zürich Oerlikon",
+      "uic": 8503006,
+      "relevance": 1,
+      "labelSize": "small"
+    }
+  ]
+}
