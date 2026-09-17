@@ -297,16 +297,26 @@
 
   /* Plan de réseau : éléments cliquables et rendu de la sélection. */
   [data-zoom-layer] [data-station],
+  [data-zoom-layer] [data-line-label],
   [data-zoom-layer] [data-hit] {
     cursor: pointer;
   }
 
-  [data-zoom-layer] [data-line][data-selected] {
-    stroke-width: 7;
-  }
-
   [data-zoom-layer] [data-station][data-selected] text {
     font-weight: 700;
+  }
+
+  /*
+   * Dès qu'une ligne est retenue, les autres passent en gris et leurs
+   * pastilles s'effacent. Les tracés de la couche de clic sont exclus :
+   * ils doivent rester transparents.
+   */
+  [data-focused] [data-line]:not([data-hit]):not([data-selected]) {
+    stroke: var(--sbb-graphite);
+  }
+
+  [data-focused] [data-line-label]:not([data-selected]) {
+    opacity: 0.25;
   }
 
   /*

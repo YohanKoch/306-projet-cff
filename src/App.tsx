@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { NetworkMap, type MapSelection } from '@/components/network-map'
+import { LinePanel } from '@/components/line-panel'
 import { StationPanel } from '@/components/station-panel'
-import { TrackPanel } from '@/components/track-panel'
 
 function App() {
   const [selection, setSelection] = useState<MapSelection | null>(null)
@@ -18,9 +18,9 @@ function App() {
         />
       )}
 
-      {selection?.kind === 'track' && (
-        <TrackPanel
-          selection={selection}
+      {selection?.kind === 'line' && (
+        <LinePanel
+          code={selection.code}
           onClose={() => setSelection(null)}
           onSelectStation={(code) => setSelection({ kind: 'station', code })}
         />

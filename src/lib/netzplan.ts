@@ -38,3 +38,29 @@ export function resolveStationCode(code: string): string {
   const trimmed = code.replace(/\d+$/, '')
   return stationsByCode.has(trimmed) ? trimmed : code
 }
+
+/** Les tronçons d'une ligne, chaque paire de gares triée pour être comparable. */
+function segmentKeys(line: NetzplanLine): string[] {
+  const keys: string[] = []
+  for (let index = 1; index < line.stations.length; index += 1) {
+    keys.push([line.stations[index - 1], line.stations[index]].sort().join('-'))
+  }
+  return keys
+}
+
+/**
+ * Lignes partageant au moins un tronçon avec celle-ci. Les 304 paires de
+ * gares du netzplan correspondent toutes à un segment du plan, la
+ * comparaison est donc fidèle au tracé.
+ */
+export function linesSharingTrack(code: string): NetzplanLine[] {
+  const line = linesByCode.get(code)
+  if (!line) {
+    return []
+  }
+
+  const segments = new Set(segmentKeys(line))
+  return lines.filter(
+    (other) => other.code !== code && segmentKeys(other).some((key) => segments.has(key)),
+  )
+}

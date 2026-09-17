@@ -24,7 +24,7 @@ type MapStatus = 'loading' | 'ready' | 'error'
 
 export type MapSelection =
   | { kind: 'station'; code: string }
-  | { kind: 'track'; line: string; from: string; to: string; lines: string[] }
+  | { kind: 'line'; code: string }
 
 /**
  * Déplace tout le contenu du SVG dans un groupe unique, sur lequel d3-zoom
@@ -56,6 +56,13 @@ function annotate(svg: SVGSVGElement): void {
 
   for (const label of svg.querySelectorAll('[id^="station_label_"]')) {
     label.setAttribute('data-station', label.id.slice('station_label_'.length))
+  }
+
+  for (const badge of svg.querySelectorAll('[id^="line_label_"]')) {
+    const [code] = badge.id.slice('line_label_'.length).split('_')
+    if (code) {
+      badge.setAttribute('data-line-label', code)
+    }
   }
 
   for (const track of svg.querySelectorAll('[id^="track_"]')) {
@@ -126,66 +133,74 @@ function fitViewBox(svg: SVGSVGElement): void {
   )
 }
 
-/** Un même tronçon est souvent emprunté par plusieurs lignes. */
-function linesOnSegment(svg: SVGSVGElement, from: string, to: string): string[] {
+/** Toutes les lignes dont un tronçon touche cette gare, d'après le plan. */
+function linesThroughStation(svg: SVGSVGElement, code: string): Set<string> {
   const codes = new Set<string>()
-  const selector =
-    `[data-from="${from}"][data-to="${to}"],` +
-    `[data-from="${to}"][data-to="${from}"]`
-
-  for (const element of svg.querySelectorAll(selector)) {
-    const code = element.getAttribute('data-line')
-    if (code) {
-      codes.add(code)
+  for (const track of svg.querySelectorAll(`[data-from="${code}"], [data-to="${code}"]`)) {
+    const line = track.getAttribute('data-line')
+    if (line) {
+      codes.add(line)
     }
   }
-
-  return [...codes].sort()
+  return codes
 }
 
-function resolveSelection(target: Element, svg: SVGSVGElement): MapSelection | null {
+function resolveSelection(target: Element): MapSelection | null {
   const station = target.closest('[data-station]')
   if (station) {
     const code = station.getAttribute('data-station')
     return code ? { kind: 'station', code } : null
   }
 
+  // Les pastilles de ligne du plan sont cliquables au même titre que les voies.
+  const badge = target.closest('[data-line-label]')
+  if (badge) {
+    const code = badge.getAttribute('data-line-label')
+    return code ? { kind: 'line', code } : null
+  }
+
   const track = target.closest('[data-line]')
-  if (!track) {
-    return null
+  if (track) {
+    const code = track.getAttribute('data-line')
+    return code ? { kind: 'line', code } : null
   }
 
-  const line = track.getAttribute('data-line')
-  const from = track.getAttribute('data-from')
-  const to = track.getAttribute('data-to')
-  if (!line || !from || !to) {
-    return null
-  }
-
-  return { kind: 'track', line, from, to, lines: linesOnSegment(svg, from, to) }
+  return null
 }
 
 /**
- * Marque la sélection dans le SVG. Les voies sont épaissies par CSS, les gares
- * reçoivent un anneau tracé dans le calque de zoom, donc solidaire du plan.
+ * Marque la sélection dans le SVG. Cliquer une voie retient la ligne entière,
+ * cliquer une gare retient toutes les lignes qui la desservent ; `data-focused`
+ * sur la racine fait passer les autres voies en gris (voir global.css).
  */
 function applySelection(svg: SVGSVGElement, selection: MapSelection | null): void {
   for (const marked of svg.querySelectorAll('[data-selected]')) {
     marked.removeAttribute('data-selected')
   }
   svg.querySelector('[data-selection-ring]')?.remove()
+  svg.removeAttribute('data-focused')
 
   if (!selection) {
     return
   }
 
-  if (selection.kind === 'track') {
-    const selector =
-      `[data-line="${selection.line}"]` +
-      `[data-from="${selection.from}"][data-to="${selection.to}"]`
+  const highlighted =
+    selection.kind === 'line'
+      ? new Set([selection.code])
+      : linesThroughStation(svg, selection.code)
+
+  for (const code of highlighted) {
+    const selector = `[data-line="${code}"], [data-line-label="${code}"]`
     for (const element of svg.querySelectorAll(selector)) {
       element.setAttribute('data-selected', '')
     }
+  }
+
+  if (highlighted.size > 0) {
+    svg.setAttribute('data-focused', '')
+  }
+
+  if (selection.kind !== 'station') {
     return
   }
 
@@ -287,7 +302,7 @@ export function NetworkMap({
 
           const target = event.target
           if (target instanceof Element) {
-            onSelectRef.current(resolveSelection(target, svg))
+            onSelectRef.current(resolveSelection(target))
           }
         })
 
