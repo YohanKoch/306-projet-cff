@@ -1,9 +1,30 @@
-import { NetworkMap } from '@/components/network-map'
+import { useState } from 'react'
+import { NetworkMap, type MapSelection } from '@/components/network-map'
+import { LinePanel } from '@/components/line-panel'
+import { StationPanel } from '@/components/station-panel'
 
 function App() {
+  const [selection, setSelection] = useState<MapSelection | null>(null)
+
   return (
-    <div className="bg-background text-foreground h-svh">
-      <NetworkMap />
+    <div className="bg-background text-foreground flex h-svh">
+      <NetworkMap selection={selection} onSelect={setSelection} className="flex-1" />
+
+      {selection?.kind === 'station' && (
+        <StationPanel
+          key={selection.code}
+          code={selection.code}
+          onClose={() => setSelection(null)}
+        />
+      )}
+
+      {selection?.kind === 'line' && (
+        <LinePanel
+          code={selection.code}
+          onClose={() => setSelection(null)}
+          onSelectStation={(code) => setSelection({ kind: 'station', code })}
+        />
+      )}
     </div>
   )
 }

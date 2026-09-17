@@ -61,12 +61,15 @@ src/
   App.tsx                    application shell
   global.css                 Tailwind entry and SBB design tokens
   components/
-    network-map.tsx          the plan: loading, framing, zoom
+    network-map.tsx          the plan: loading, framing, zoom, clicks
+    line-panel.tsx           line details, read locally
+    station-panel.tsx        station details, fetched on selection
     ui/                      shadcn/ui components
   data/
     netzplan.json            34 lines and 135 stations, 28 KB
   lib/
     netzplan.ts              typed access and lookups
+    sbb-open-data.ts         SBB open data portal client
     utils.ts                 shadcn `cn` helper
 ```
 
@@ -125,6 +128,101 @@ Station codes in the SVG almost always match the reference data. The
 one exception, `track_IR37_AA_LB1`, is normalised by
 `resolveStationCode()` in `src/lib/netzplan.ts`.
 
+## Clicking the plan
+
+Clicking a station, a track or a line badge opens a panel beside the
+map. Clicking anywhere else closes it. The selection is a single piece
+of state in `App.tsx`, shaped as a discriminated union:
+
+```ts
+type MapSelection =
+  | { kind: 'station'; code: string }
+  | { kind: 'line'; code: string }
+```
+
+Clicking a track selects the whole line it belongs to, not the segment
+under the pointer. Clicking a station selects every line calling there.
+Either way the outcome is a set of line codes, which drives the
+highlight described below.
+
+### Catching the click
+
+One delegated listener sits on the SVG root and walks up from the event
+target: `closest('[data-station]')` first, then `closest('[data-line-label]')`
+for the line badges printed on the plan, then `closest('[data-line]')`.
+Station icons and labels are painted above the tracks, so a station
+always wins over the segment running underneath it.
+
+Tracks are drawn with a 3 unit stroke, too thin to click comfortably.
+Each segment is therefore doubled by a transparent clone with a 14 unit
+stroke, gathered in a hit layer inserted just before the line labels, so
+the fat targets never steal a click from a station. The clone is a copy
+of the original element rather than a rebuilt path, because the plan
+mixes three shapes: 120 `path`, 176 `line` and 10 `polyline`.
+
+Panning also fires a click, so the pointer is tracked between
+`pointerdown` and `click`, and a gesture that travelled more than 4
+pixels is dropped.
+
+### Highlighting the selection
+
+Every track and badge belonging to a selected line is marked with
+`data-selected`, and the SVG root gets `data-focused`. Two CSS rules do
+the rest: tracks that are not selected turn grey, and badges that are
+not selected fade. The hit layer is excluded from both, since its clones
+must stay transparent.
+
+Selecting Zürich HB, for instance, keeps 162 of the 306 segments in
+colour, one for each of the 18 lines calling there, and greys the other
+144.
+
+A selected station also gets a red ring appended to the zoom layer, so
+it pans and zooms with the plan, and its label turns bold.
+
+### Station details
+
+`src/lib/sbb-open-data.ts` queries the SBB open data portal[4] on
+selection, both datasets in parallel, aborted if the selection changes
+before they answer. 133 of the 135 stations on the plan are covered;
+the two missing ones, Annemasse and Konstanz, are outside Switzerland.
+
+The average daily passenger count comes from the `passagierfrequenz`
+dataset. Its `code_codice` field carries exactly the same station codes
+as the netzplan, so the join needs no mapping table, and the query keeps
+the most recent year available. Working-day and non-working-day averages
+come with it.
+
+Accessibility under the LHand comes from the BehiG platform-edge
+dataset, `21196_behig-haltekantepunkt`, roughly 496,000 rows keyed by
+station abbreviation in `bps_abk`. The verdict sits in `konf`, which
+holds three values:
+
+| `konf` | Meaning                                       |
+| ------ | --------------------------------------------- |
+| `18`   | P35 or P55 platform, no defect                |
+| `35`   | P35 or P55 platform, 40 to 75 mm gap          |
+| `02`   | low platform, or a major defect               |
+
+A station has one verdict per platform edge, so a station-level status
+is derived from them: every edge compliant gives compliant, at least one
+compliant or partial gives partially compliant, none gives not
+compliant, and no rows at all gives unknown. The query groups and counts
+server-side, so the browser never pulls the rows themselves.
+
+The `dashboard_behig_tu` dataset on the same portal would have given a
+ready-made per-station verdict, but it is currently empty.
+
+### Line details
+
+The line panel reads no API. Everything it shows already sits in
+`src/data/netzplan.json`: the line with its official colour, its
+terminuses and its full run. The lines sharing track with it are found
+by comparing consecutive station pairs, which is faithful to the drawing
+because all 304 pairs in the netzplan exist as a segment on the plan.
+
+Stations listed in the panel are clickable and switch the selection over
+to the station panel.
+
 ## Styling
 
 `src/global.css` carries the whole SBB visual identity, taken from the
@@ -144,42 +242,7 @@ to Helvetica Neue and Arial.
 
 ## Planned features
 
-Everything below is designed but not yet implemented.
-
-### Selecting a line
-
-The 34 lines come from `src/data/netzplan.json`, each with its official
-colour and its ordered station list. Picking one dims every path except
-`[data-line="IC1"]`, and dims the station icons and labels whose code
-is absent from that line's station list.
-
-Because the highlight is pure CSS on attributes already present in the
-document, it costs one class toggle on the SVG root and no React
-re-render of the plan.
-
-### Station details
-
-Clicking a `[data-station]` element opens a panel keyed on the station
-code. Two figures are required.
-
-The average daily passenger count comes from the `passagierfrequenz`
-dataset on the SBB open data portal[4]. Its `code_codice` field uses
-exactly the same station codes as the netzplan, which makes the join
-direct, and `dtv_tjm_tgm` is the average daily traffic. Working-day and
-non-working-day averages are available alongside it.
-
-Accessibility under the LHand comes from the BehiG platform-edge
-dataset, `21196_behig-haltekantepunkt`. It holds roughly 496,000 rows,
-one per platform edge, keyed by station abbreviation in `bps_abk`,
-with the compliance verdict in `konformitaet` and `konf`. A station
-therefore has many verdicts, and a station-level status has to be
-derived from them. That aggregation rule is the open question of this
-feature. A `dashboard_behig_tu` dataset exists on the same portal but
-is currently empty.
-
-Both datasets are near-static, so the sane approach is to pre-compute a
-compact per-station file with a script alongside
-`extract-netzplan.mjs`, rather than query the portal from the browser.
+The feature below is designed but not yet implemented.
 
 ### Live trains
 
@@ -238,8 +301,9 @@ Accessibility, per the brief:
 | ----------------------- | ------------------------------ |
 | SBB styling             | done                           |
 | Network plan, pan, zoom | done                           |
-| Line highlighting       | attributes ready, UI to build  |
-| Station details         | data sources identified        |
+| Station details         | done                           |
+| Line details            | done                           |
+| Line highlighting       | done                           |
 | Live trains             | designed, API key outstanding  |
 
 [1]: https://network.sbb.ch/fr/

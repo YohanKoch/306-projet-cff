@@ -295,6 +295,30 @@
   h5 { font-size: 1.125rem; }
   h6 { font-size: 0.875rem; }
 
+  /* Plan de réseau : éléments cliquables et rendu de la sélection. */
+  [data-zoom-layer] [data-station],
+  [data-zoom-layer] [data-line-label],
+  [data-zoom-layer] [data-hit] {
+    cursor: pointer;
+  }
+
+  [data-zoom-layer] [data-station][data-selected] text {
+    font-weight: 700;
+  }
+
+  /*
+   * Dès qu'une ligne est retenue, les autres passent en gris et leurs
+   * pastilles s'effacent. Les tracés de la couche de clic sont exclus :
+   * ils doivent rester transparents.
+   */
+  [data-focused] [data-line]:not([data-hit]):not([data-selected]) {
+    stroke: var(--sbb-graphite);
+  }
+
+  [data-focused] [data-line-label]:not([data-selected]) {
+    opacity: 0.25;
+  }
+
   /*
    * Focus CFF : contour fin (1px), offset 3px, jamais de halo flou.
    * Le `--tw-ring-shadow` neutralise le ring par défaut de shadcn
