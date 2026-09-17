@@ -14,10 +14,12 @@
 @custom-variant dark (&:is(.dark *));
 
 /* -------------------------------------------------------------------------
- * Police SBB Web (CDN officiel SBB).
- * L'usage de la police SBB est réservé aux projets CFF / partenaires CFF.
- * Sans licence, retirer ces @font-face : la pile de repli
- * (Helvetica Neue / Arial) prend alors le relais.
+ * Typographie : Helvetica sur tout le site, interface et plan compris.
+ *
+ * La police SBB Web reste déclarée ci-dessous mais n'est plus dans la pile
+ * `--font-sans` : un @font-face inutilisé ne télécharge rien. Pour revenir
+ * à la police de marque, remettre 'SBB' en tête de `--font-sans`. Son usage
+ * est de toute façon réservé aux projets CFF et partenaires CFF.
  * ---------------------------------------------------------------------- */
 @font-face {
   font-family: 'SBB';
@@ -189,7 +191,7 @@
  *    -> bg-primary, text-muted-foreground, bg-sbb-sky, font-sans, ...
  * ---------------------------------------------------------------------- */
 @theme inline {
-  --font-sans: 'SBB', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -303,6 +305,21 @@
   }
 
   [data-zoom-layer] [data-station][data-selected] text {
+    font-weight: 700;
+  }
+
+  /*
+   * Le SVG des CFF réclame les familles `SBBWeb-Roman` et `SBBWeb-Bold`, qui
+   * ne correspondent à aucune police installée : sans cette règle, tous les
+   * libellés du plan retombent sur la sérif par défaut du navigateur. La
+   * graisse est réintroduite à partir du nom de famille demandé.
+   */
+  [data-zoom-layer] text {
+    font-family: var(--font-sans);
+  }
+
+  [data-zoom-layer] text[font-family^='SBBWeb-Bold'],
+  [data-zoom-layer] text[font-family^='Courier-Bold'] {
     font-weight: 700;
   }
 
