@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { select } from 'd3-selection'
+import { select, type Selection } from 'd3-selection'
 import { zoom, zoomIdentity, type ZoomBehavior } from 'd3-zoom'
 import { Maximize, Minus, Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -86,6 +86,7 @@ function fitViewBox(svg: SVGSVGElement): void {
 export function NetworkMap({ className }: { className?: string }) {
   const hostRef = useRef<HTMLDivElement>(null)
   const svgRef = useRef<SVGSVGElement | null>(null)
+  const mapSVGRef = useRef<Selection<SVGSVGElement, unknown, null, undefined> | null>(null)
   const zoomRef = useRef<ZoomBehavior<SVGSVGElement, unknown> | null>(null)
   const [status, setStatus] = useState<MapStatus>('loading')
 
@@ -126,7 +127,8 @@ export function NetworkMap({ className }: { className?: string }) {
           .on('zoom', (event) => {
             layer.setAttribute('transform', event.transform.toString())
           })
-        select(svg).call(behaviour)
+        mapSVGRef.current = select(svg)
+        mapSVGRef.current.call(behaviour)
 
         svgRef.current = svg
         zoomRef.current = behaviour
@@ -144,23 +146,24 @@ export function NetworkMap({ className }: { className?: string }) {
       controller.abort()
       host.replaceChildren()
       svgRef.current = null
+      mapSVGRef.current = null
       zoomRef.current = null
     }
   }, [])
 
   const scaleBy = useCallback((factor: number) => {
-    const svg = svgRef.current
+    const mapSVG = mapSVGRef.current
     const behaviour = zoomRef.current
-    if (svg && behaviour) {
-      behaviour.scaleBy(select(svg), factor)
+    if (mapSVG && behaviour) {
+      behaviour.scaleBy(mapSVG, factor)
     }
   }, [])
 
   const resetZoom = useCallback(() => {
-    const svg = svgRef.current
+    const mapSVG = mapSVGRef.current
     const behaviour = zoomRef.current
-    if (svg && behaviour) {
-      behaviour.transform(select(svg), zoomIdentity)
+    if (mapSVG && behaviour) {
+      behaviour.transform(mapSVG, zoomIdentity)
     }
   }, [])
 
