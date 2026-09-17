@@ -232,13 +232,21 @@ official Lyne design tokens[3]:
   utilities such as `bg-sbb-red` or `text-sbb-sky`
 - the shadcn tokens remapped onto it, in light and dark mode, so every
   shadcn component inherits the SBB look without being patched
-- SBB Web typography, its line heights and its heading scale
+- Helvetica throughout, over the SBB line heights and heading scale
 - the SBB focus ring: a thin outline offset by 3px, replacing the
   default shadcn halo
 
-The SBB Web font is loaded from the official SBB CDN and is licensed
-for SBB projects only. Removing the three `@font-face` rules falls back
-to Helvetica Neue and Arial.
+The SBB Web face is still declared from the official SBB CDN, but it is
+no longer part of `--font-sans`, and an unused `@font-face` downloads
+nothing. Putting `'SBB'` back at the head of the stack restores the
+brand font, whose licence covers SBB projects and partners only.
+
+The plan needs its own rule. Its text asks for the families
+`SBBWeb-Roman` and `SBBWeb-Bold`, which match no installed font and no
+`@font-face`, so all 677 labels used to fall back to the browser's
+default serif. A CSS rule on `[data-zoom-layer] text` pulls them onto
+the site stack, and an attribute selector on the requested family name
+puts the bold weight back.
 
 ## Planned features
 
