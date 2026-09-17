@@ -295,6 +295,20 @@
   h5 { font-size: 1.125rem; }
   h6 { font-size: 0.875rem; }
 
+  /* Plan de réseau : éléments cliquables et rendu de la sélection. */
+  [data-zoom-layer] [data-station],
+  [data-zoom-layer] [data-hit] {
+    cursor: pointer;
+  }
+
+  [data-zoom-layer] [data-line][data-selected] {
+    stroke-width: 7;
+  }
+
+  [data-zoom-layer] [data-station][data-selected] text {
+    font-weight: 700;
+  }
+
   /*
    * Focus CFF : contour fin (1px), offset 3px, jamais de halo flou.
    * Le `--tw-ring-shadow` neutralise le ring par défaut de shadcn

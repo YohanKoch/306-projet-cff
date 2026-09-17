@@ -14,8 +14,17 @@ const ZOOM_STEP = 1.4
 /** Calque du contour suisse : sert de cadrage initial. */
 const FRAME_SELECTOR = '#A_Schweiz'
 const FRAME_MARGIN = 0.02
+/** Épaisseur du tracé invisible qui reçoit les clics sur une voie. */
+const HIT_STROKE_WIDTH = 14
+/** Au-delà, le geste est un déplacement de la carte, pas un clic. */
+const DRAG_TOLERANCE = 4
+const SELECTION_RING_PADDING = 4
 
 type MapStatus = 'loading' | 'ready' | 'error'
+
+export type MapSelection =
+  | { kind: 'station'; code: string }
+  | { kind: 'track'; line: string; from: string; to: string; lines: string[] }
 
 /**
  * Déplace tout le contenu du SVG dans un groupe unique, sur lequel d3-zoom
@@ -61,6 +70,40 @@ function annotate(svg: SVGSVGElement): void {
 }
 
 /**
+ * Les voies sont tracées avec un trait de 3 unités, trop fin pour être cliqué
+ * confortablement. Chaque segment est doublé d'un clone transparent plus
+ * épais, inséré avant les libellés et les gares pour ne pas leur voler le clic.
+ *
+ * Le clone est une copie de l'élément d'origine, car le plan mélange trois
+ * formes : 120 `path`, 176 `line` et 10 `polyline`. Retirer `stroke` et
+ * `stroke-width` du clone laisse hériter ceux du groupe.
+ */
+function createHitLayer(svg: SVGSVGElement): void {
+  const hits = svg.ownerDocument.createElementNS(SVG_NS, 'g')
+  hits.setAttribute('data-hit-layer', '')
+  hits.setAttribute('fill', 'none')
+  hits.setAttribute('stroke', 'transparent')
+  hits.setAttribute('stroke-width', String(HIT_STROKE_WIDTH))
+  hits.setAttribute('stroke-linecap', 'round')
+
+  for (const track of svg.querySelectorAll('[data-line]')) {
+    const hit = track.cloneNode(false) as Element
+    hit.removeAttribute('id')
+    hit.removeAttribute('stroke')
+    hit.removeAttribute('stroke-width')
+    hit.setAttribute('data-hit', '')
+    hits.append(hit)
+  }
+
+  const labels = svg.querySelector('#line_labels')
+  if (labels) {
+    labels.before(hits)
+  } else {
+    svg.querySelector('[data-zoom-layer]')?.append(hits)
+  }
+}
+
+/**
  * Le `viewBox` d'origine est un carré de 4000 unités dont la Suisse n'occupe
  * qu'une fraction. On recadre sur le contour du pays pour que le plan
  * remplisse le conteneur.
@@ -83,11 +126,108 @@ function fitViewBox(svg: SVGSVGElement): void {
   )
 }
 
-export function NetworkMap({ className }: { className?: string }) {
+/** Un même tronçon est souvent emprunté par plusieurs lignes. */
+function linesOnSegment(svg: SVGSVGElement, from: string, to: string): string[] {
+  const codes = new Set<string>()
+  const selector =
+    `[data-from="${from}"][data-to="${to}"],` +
+    `[data-from="${to}"][data-to="${from}"]`
+
+  for (const element of svg.querySelectorAll(selector)) {
+    const code = element.getAttribute('data-line')
+    if (code) {
+      codes.add(code)
+    }
+  }
+
+  return [...codes].sort()
+}
+
+function resolveSelection(target: Element, svg: SVGSVGElement): MapSelection | null {
+  const station = target.closest('[data-station]')
+  if (station) {
+    const code = station.getAttribute('data-station')
+    return code ? { kind: 'station', code } : null
+  }
+
+  const track = target.closest('[data-line]')
+  if (!track) {
+    return null
+  }
+
+  const line = track.getAttribute('data-line')
+  const from = track.getAttribute('data-from')
+  const to = track.getAttribute('data-to')
+  if (!line || !from || !to) {
+    return null
+  }
+
+  return { kind: 'track', line, from, to, lines: linesOnSegment(svg, from, to) }
+}
+
+/**
+ * Marque la sélection dans le SVG. Les voies sont épaissies par CSS, les gares
+ * reçoivent un anneau tracé dans le calque de zoom, donc solidaire du plan.
+ */
+function applySelection(svg: SVGSVGElement, selection: MapSelection | null): void {
+  for (const marked of svg.querySelectorAll('[data-selected]')) {
+    marked.removeAttribute('data-selected')
+  }
+  svg.querySelector('[data-selection-ring]')?.remove()
+
+  if (!selection) {
+    return
+  }
+
+  if (selection.kind === 'track') {
+    const selector =
+      `[data-line="${selection.line}"]` +
+      `[data-from="${selection.from}"][data-to="${selection.to}"]`
+    for (const element of svg.querySelectorAll(selector)) {
+      element.setAttribute('data-selected', '')
+    }
+    return
+  }
+
+  for (const element of svg.querySelectorAll(`[data-station="${selection.code}"]`)) {
+    element.setAttribute('data-selected', '')
+  }
+
+  const icon = svg.querySelector(`[id^="station_icon_"][data-station="${selection.code}"]`)
+  if (!(icon instanceof SVGGraphicsElement)) {
+    return
+  }
+
+  const box = icon.getBBox()
+  const ring = svg.ownerDocument.createElementNS(SVG_NS, 'circle')
+  ring.setAttribute('data-selection-ring', '')
+  ring.setAttribute('cx', String(box.x + box.width / 2))
+  ring.setAttribute('cy', String(box.y + box.height / 2))
+  ring.setAttribute('r', String(Math.max(box.width, box.height) / 2 + SELECTION_RING_PADDING))
+  ring.setAttribute('fill', 'none')
+  ring.setAttribute('stroke-width', '2')
+  ring.style.stroke = 'var(--sbb-red)'
+  svg.querySelector('[data-zoom-layer]')?.append(ring)
+}
+
+export function NetworkMap({
+  selection,
+  onSelect,
+  className,
+}: {
+  selection: MapSelection | null
+  onSelect: (selection: MapSelection | null) => void
+  className?: string
+}) {
   const hostRef = useRef<HTMLDivElement>(null)
   const svgRef = useRef<SVGSVGElement | null>(null)
   const zoomRef = useRef<ZoomBehavior<SVGSVGElement, unknown> | null>(null)
+  const onSelectRef = useRef(onSelect)
   const [status, setStatus] = useState<MapStatus>('loading')
+
+  useEffect(() => {
+    onSelectRef.current = onSelect
+  }, [onSelect])
 
   useEffect(() => {
     const host = hostRef.current
@@ -118,6 +258,7 @@ export function NetworkMap({ className }: { className?: string }) {
 
         const layer = createZoomLayer(svg)
         annotate(svg)
+        createHitLayer(svg)
         host.replaceChildren(svg)
         fitViewBox(svg)
 
@@ -127,6 +268,28 @@ export function NetworkMap({ className }: { className?: string }) {
             layer.setAttribute('transform', event.transform.toString())
           })
         select(svg).call(behaviour)
+
+        let pressedAt: { x: number; y: number } | null = null
+
+        svg.addEventListener('pointerdown', (event) => {
+          pressedAt = { x: event.clientX, y: event.clientY }
+        })
+
+        svg.addEventListener('click', (event) => {
+          const origin = pressedAt
+          pressedAt = null
+          if (origin) {
+            const moved = Math.hypot(event.clientX - origin.x, event.clientY - origin.y)
+            if (moved > DRAG_TOLERANCE) {
+              return
+            }
+          }
+
+          const target = event.target
+          if (target instanceof Element) {
+            onSelectRef.current(resolveSelection(target, svg))
+          }
+        })
 
         svgRef.current = svg
         zoomRef.current = behaviour
@@ -147,6 +310,13 @@ export function NetworkMap({ className }: { className?: string }) {
       zoomRef.current = null
     }
   }, [])
+
+  useEffect(() => {
+    const svg = svgRef.current
+    if (svg && status === 'ready') {
+      applySelection(svg, selection)
+    }
+  }, [selection, status])
 
   const scaleBy = useCallback((factor: number) => {
     const svg = svgRef.current
