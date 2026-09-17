@@ -62,8 +62,8 @@ src/
   global.css                 Tailwind entry and SBB design tokens
   components/
     network-map.tsx          the plan: loading, framing, zoom, clicks
+    line-panel.tsx           line details, read locally
     station-panel.tsx        station details, fetched on selection
-    track-panel.tsx          segment and line details, read locally
     ui/                      shadcn/ui components
   data/
     netzplan.json            34 lines and 135 stations, 28 KB
@@ -130,21 +130,26 @@ one exception, `track_IR37_AA_LB1`, is normalised by
 
 ## Clicking the plan
 
-Clicking a station or a track segment opens a panel beside the map.
-Clicking anywhere else closes it. The selection is a single piece of
-state in `App.tsx`, shaped as a discriminated union:
+Clicking a station, a track or a line badge opens a panel beside the
+map. Clicking anywhere else closes it. The selection is a single piece
+of state in `App.tsx`, shaped as a discriminated union:
 
 ```ts
 type MapSelection =
   | { kind: 'station'; code: string }
-  | { kind: 'track'; line: string; from: string; to: string;
-      lines: string[] }
+  | { kind: 'line'; code: string }
 ```
+
+Clicking a track selects the whole line it belongs to, not the segment
+under the pointer. Clicking a station selects every line calling there.
+Either way the outcome is a set of line codes, which drives the
+highlight described below.
 
 ### Catching the click
 
 One delegated listener sits on the SVG root and walks up from the event
-target: `closest('[data-station]')` first, then `closest('[data-line]')`.
+target: `closest('[data-station]')` first, then `closest('[data-line-label]')`
+for the line badges printed on the plan, then `closest('[data-line]')`.
 Station icons and labels are painted above the tracks, so a station
 always wins over the segment running underneath it.
 
@@ -159,9 +164,20 @@ Panning also fires a click, so the pointer is tracked between
 `pointerdown` and `click`, and a gesture that travelled more than 4
 pixels is dropped.
 
-The current selection is marked in the SVG itself: the segment is
-thickened by a CSS rule on `[data-selected]`, and the station gets a red
-ring appended to the zoom layer, so it pans and zooms with the plan.
+### Highlighting the selection
+
+Every track and badge belonging to a selected line is marked with
+`data-selected`, and the SVG root gets `data-focused`. Two CSS rules do
+the rest: tracks that are not selected turn grey, and badges that are
+not selected fade. The hit layer is excluded from both, since its clones
+must stay transparent.
+
+Selecting Zürich HB, for instance, keeps 162 of the 306 segments in
+colour, one for each of the 18 lines calling there, and greys the other
+144.
+
+A selected station also gets a red ring appended to the zoom layer, so
+it pans and zooms with the plan, and its label turns bold.
 
 ### Station details
 
@@ -196,14 +212,13 @@ server-side, so the browser never pulls the rows themselves.
 The `dashboard_behig_tu` dataset on the same portal would have given a
 ready-made per-station verdict, but it is currently empty.
 
-### Segment details
+### Line details
 
-The track panel reads no API. Everything it shows already sits in
-`src/data/netzplan.json` and in the plan itself: the line with its
-official colour and terminuses, the two stations bounding the segment,
-and the full run of the line. The other lines sharing the segment are
-found by querying the SVG for the same pair of endpoints in either
-direction, which is common on the busy corridors.
+The line panel reads no API. Everything it shows already sits in
+`src/data/netzplan.json`: the line with its official colour, its
+terminuses and its full run. The lines sharing track with it are found
+by comparing consecutive station pairs, which is faithful to the drawing
+because all 304 pairs in the netzplan exist as a segment on the plan.
 
 Stations listed in the panel are clickable and switch the selection over
 to the station panel.
@@ -227,18 +242,7 @@ to Helvetica Neue and Arial.
 
 ## Planned features
 
-The two features below are designed but not yet implemented.
-
-### Selecting a line
-
-The 34 lines come from `src/data/netzplan.json`, each with its official
-colour and its ordered station list. Picking one dims every path except
-`[data-line="IC1"]`, and dims the station icons and labels whose code
-is absent from that line's station list.
-
-Because the highlight is pure CSS on attributes already present in the
-document, it costs one class toggle on the SVG root and no React
-re-render of the plan.
+The feature below is designed but not yet implemented.
 
 ### Live trains
 
@@ -298,8 +302,8 @@ Accessibility, per the brief:
 | SBB styling             | done                           |
 | Network plan, pan, zoom | done                           |
 | Station details         | done                           |
-| Segment details         | done                           |
-| Line highlighting       | attributes ready, UI to build  |
+| Line details            | done                           |
+| Line highlighting       | done                           |
 | Live trains             | designed, API key outstanding  |
 
 [1]: https://network.sbb.ch/fr/
